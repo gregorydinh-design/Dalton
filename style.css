@@ -117,16 +117,17 @@ h1 {
 /* ── Diamant SVG ── */
 .diamond-wrapper {
   position: relative;
-  width: 320px;
-  height: 320px;
+  width: min(420px, 94vw);
+  aspect-ratio: 1;
   flex-shrink: 0;
+  align-self: center;
 }
 .diamond-svg {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  filter: drop-shadow(0 0 18px rgba(0, 180, 255, 0.25));
+  filter: drop-shadow(0 0 22px rgba(0, 180, 255, 0.3));
 }
 
 /* ── Zones de champs dans le diamant ── */
@@ -135,82 +136,78 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 4px;
+  gap: 5px;
+  transform: translate(-50%, -50%);
+  text-align: center;
 }
 
-/* Haut : PpO2 */
+/* Haut : PpO2 — centroïde du triangle supérieur */
 .zone-top {
-  top: 22px;
   left: 50%;
-  transform: translateX(-50%);
-  width: 160px;
-  text-align: center;
+  top: 32%;
+  width: 40%;
 }
 
-/* Bas-gauche : %O2 */
+/* Bas-gauche : %O2 — centroïde du triangle bas-gauche */
 .zone-bottom-left {
-  bottom: 42px;
-  left: 20px;
-  width: 130px;
-  text-align: center;
+  left: 28%;
+  top: 69%;
+  width: 36%;
 }
 
-/* Bas-droit : Pabs */
+/* Bas-droit : Pabs — centroïde du triangle bas-droit */
 .zone-bottom-right {
-  bottom: 42px;
-  right: 20px;
-  width: 130px;
-  text-align: center;
+  left: 72%;
+  top: 69%;
+  width: 36%;
 }
 
 .field-zone label {
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 1px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.8px;
   text-transform: uppercase;
-  color: var(--text-dim);
   pointer-events: none;
 }
 
 .input-row {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 3px;
+  width: 100%;
 }
 
 .field-zone input {
-  width: 80px;
-  background: rgba(0, 0, 0, 0.35);
-  border: 1.5px solid rgba(0, 200, 255, 0.25);
+  flex: 1;
+  min-width: 0;
+  background: rgba(0, 0, 0, 0.45);
+  border: 1.5px solid rgba(0, 200, 255, 0.3);
   border-radius: 8px;
   color: #fff;
-  font-size: 1.1rem;
-  font-weight: 600;
+  font-size: 1.15rem;
+  font-weight: 700;
   text-align: center;
-  padding: 6px 4px;
+  padding: 7px 4px;
   outline: none;
   transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
-  -moz-appearance: textfield;
 }
-.field-zone input::-webkit-inner-spin-button,
-.field-zone input::-webkit-outer-spin-button { -webkit-appearance: none; }
 
 .field-zone input:focus {
   border-color: var(--teal);
-  box-shadow: 0 0 0 3px rgba(0, 212, 170, 0.18);
-  background: rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 0 3px rgba(0, 212, 170, 0.2);
+  background: rgba(0, 0, 0, 0.6);
 }
 
 /* Champ calculé */
 .field-zone input.computed {
-  background: rgba(0, 212, 170, 0.1);
+  background: rgba(0, 212, 170, 0.12);
   border-color: var(--teal);
   color: var(--teal);
   animation: pulse-in 0.35s ease;
 }
 .field-zone input.computed-warning {
-  background: rgba(255, 77, 106, 0.1);
+  background: rgba(255, 77, 106, 0.12);
   border-color: var(--red);
   color: var(--red);
   animation: pulse-in 0.35s ease;
@@ -223,13 +220,13 @@ h1 {
 }
 
 .unit {
-  font-size: 0.65rem;
+  font-size: 0.62rem;
   color: var(--text-dim);
-  min-width: 18px;
+  white-space: nowrap;
 }
 
 .depth-hint {
-  font-size: 0.68rem;
+  font-size: 0.7rem;
   color: var(--blue);
   font-weight: 600;
   min-height: 14px;
@@ -322,9 +319,7 @@ h1 {
 }
 
 /* ── Responsive ── */
-@media (max-width: 360px) {
-  .diamond-wrapper { width: 280px; height: 280px; }
-  .zone-top        { width: 140px; }
-  .zone-bottom-left, .zone-bottom-right { width: 110px; }
-  .field-zone input { width: 68px; font-size: 1rem; }
+@media (max-width: 340px) {
+  .field-zone input { font-size: 0.95rem; padding: 5px 3px; }
+  .field-zone label { font-size: 0.62rem; }
 }
