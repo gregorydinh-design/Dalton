@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<!-- Ouvrir ce fichier dans un navigateur pour générer les icônes PNG -->
+<html><body>
+<canvas id="c192" width="192" height="192" style="display:none"></canvas>
+<canvas id="c512" width="512" height="512" style="display:none"></canvas>
+<a id="dl192" download="icon-192.png">Télécharger icon-192.png</a><br><br>
+<a id="dl512" download="icon-512.png">Télécharger icon-512.png</a>
+<script>
+function drawIcon(canvas) {
+  const s = canvas.width;
+  const ctx = canvas.getContext('2d');
+  const g = ctx.createLinearGradient(0,0,s,s);
+  g.addColorStop(0,'#0a2a3a'); g.addColorStop(1,'#071a27');
+  ctx.fillStyle = g;
+  const r = s*0.195;
+  ctx.beginPath();
+  ctx.moveTo(r,0); ctx.lineTo(s-r,0);
+  ctx.quadraticCurveTo(s,0,s,r);
+  ctx.lineTo(s,s-r); ctx.quadraticCurveTo(s,s,s-r,s);
+  ctx.lineTo(r,s); ctx.quadraticCurveTo(0,s,0,s-r);
+  ctx.lineTo(0,r); ctx.quadraticCurveTo(0,0,r,0);
+  ctx.closePath(); ctx.fill();
+
+  const bg2 = ctx.createLinearGradient(0,0,s,s);
+  bg2.addColorStop(0,'#00d4aa'); bg2.addColorStop(0.5,'#00aaff'); bg2.addColorStop(1,'#00d4aa');
+  ctx.strokeStyle = bg2; ctx.lineWidth = s*0.023;
+  ctx.beginPath();
+  ctx.moveTo(s/2, s*0.078); ctx.lineTo(s*0.921, s/2);
+  ctx.lineTo(s/2, s*0.922); ctx.lineTo(s*0.078, s/2);
+  ctx.closePath(); ctx.stroke();
+
+  ctx.fillStyle = 'rgba(13,61,92,0.9)';
+  ctx.beginPath();
+  ctx.moveTo(s/2, s*0.085); ctx.lineTo(s*0.915, s/2);
+  ctx.lineTo(s/2, s*0.915); ctx.lineTo(s*0.085, s/2);
+  ctx.closePath(); ctx.fill();
+
+  ctx.strokeStyle = '#ff4d6a'; ctx.lineWidth = s*0.012;
+  ctx.beginPath(); ctx.moveTo(s*0.09,s/2); ctx.lineTo(s*0.91,s/2); ctx.stroke();
+  ctx.strokeStyle = '#00aaff';
+  ctx.beginPath(); ctx.moveTo(s/2,s/2); ctx.lineTo(s/2,s*0.912); ctx.stroke();
+
+  ctx.textAlign = 'center'; ctx.fontWeight = '700';
+  ctx.fillStyle = '#00d4aa'; ctx.font = `bold ${s*0.11}px system-ui,sans-serif`;
+  ctx.fillText('PpO\u2082', s/2, s*0.36);
+  ctx.fillStyle = '#ff9900'; ctx.font = `bold ${s*0.095}px system-ui,sans-serif`;
+  ctx.fillText('%O\u2082', s*0.3, s*0.69);
+  ctx.fillStyle = '#00aaff';
+  ctx.fillText('Pabs', s*0.7, s*0.69);
+}
+['c192','c512'].forEach(id => {
+  const c = document.getElementById(id);
+  drawIcon(c);
+  document.getElementById('dl'+id.replace('c','')).href = c.toDataURL('image/png');
+});
+</script>
+</body></html>

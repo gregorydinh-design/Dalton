@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0a2a3a" />
+  <meta name="description" content="Calculette du Diamant de Dalton — Loi des pressions partielles" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <title>Diamant de Dalton</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Bulles de fond -->
+  <div class="bubbles" aria-hidden="true">
+    <span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span>
+    <span></span><span></span>
+  </div>
+
+  <main class="app">
+
+    <header class="app-header">
+      <div class="header-icon">🤿</div>
+      <div>
+        <h1>Diamant de Dalton</h1>
+        <p class="subtitle">Loi des pressions partielles</p>
+      </div>
+    </header>
+
+    <p class="formula-label">
+      <span class="var ppo2-color">PpO₂</span>
+      <span class="op">=</span>
+      <span class="var pct-color">%O₂</span>
+      <span class="op">×</span>
+      <span class="var pabs-color">P<sub>abs</sub></span>
+      <span class="op">÷ 100</span>
+    </p>
+
+    <!-- Diamant -->
+    <div class="diamond-wrapper" role="region" aria-label="Diamant de Dalton">
+      <svg class="diamond-svg" viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- Ombre portée -->
+        <defs>
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+            <feMerge>
+              <feMergeNode in="coloredBlur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+          <filter id="shadow">
+            <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#0a4a6a" flood-opacity="0.7"/>
+          </filter>
+          <linearGradient id="diamondFill" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#0d3d5c;stop-opacity:0.92"/>
+            <stop offset="100%" style="stop-color:#072030;stop-opacity:0.92"/>
+          </linearGradient>
+          <linearGradient id="borderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#00d4aa"/>
+            <stop offset="50%" style="stop-color:#00aaff"/>
+            <stop offset="100%" style="stop-color:#00d4aa"/>
+          </linearGradient>
+        </defs>
+
+        <!-- Fond diamant -->
+        <polygon points="160,10 310,160 160,310 10,160"
+                 fill="url(#diamondFill)"
+                 stroke="url(#borderGrad)"
+                 stroke-width="4"
+                 filter="url(#shadow)" />
+
+        <!-- Reflet vitre -->
+        <polygon points="160,14 306,160 160,90 14,160"
+                 fill="white" opacity="0.04" />
+
+        <!-- Ligne horizontale rouge -->
+        <line x1="14" y1="160" x2="306" y2="160"
+              stroke="#ff4d6a" stroke-width="2.5" filter="url(#glow)" />
+
+        <!-- Ligne verticale bleue -->
+        <line x1="160" y1="160" x2="160" y2="306"
+              stroke="#00aaff" stroke-width="2.5" filter="url(#glow)" />
+      </svg>
+
+      <!-- Champ PpO2 — quadrant haut -->
+      <div class="field-zone zone-top" id="zone-ppo2">
+        <label for="ppo2">PpO₂</label>
+        <div class="input-row">
+          <input type="number" id="ppo2" placeholder="—" step="0.001" min="0" inputmode="decimal" />
+          <span class="unit">bar</span>
+        </div>
+      </div>
+
+      <!-- Champ %O2 — quadrant bas-gauche -->
+      <div class="field-zone zone-bottom-left" id="zone-pct">
+        <label for="pct">%O₂</label>
+        <div class="input-row">
+          <input type="number" id="pct" placeholder="—" step="0.1" min="0" max="100" inputmode="decimal" />
+          <span class="unit">%</span>
+        </div>
+      </div>
+
+      <!-- Champ Pabs — quadrant bas-droit -->
+      <div class="field-zone zone-bottom-right" id="zone-pabs">
+        <label for="pabs">P<sub>abs</sub></label>
+        <div class="input-row">
+          <input type="number" id="pabs" placeholder="—" step="0.1" min="0" inputmode="decimal" />
+          <span class="unit">bar</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Message d'état -->
+    <div class="status-bar" id="status" aria-live="polite">
+      Remplissez 2 champs pour calculer le 3ème
+    </div>
+
+    <!-- Bouton reset -->
+    <button class="btn-reset" id="btn-reset" aria-label="Réinitialiser les champs">
+      ↺ Réinitialiser
+    </button>
+
+    <!-- Info contextuelle plongée -->
+    <section class="info-card">
+      <h2>⚠️ Limites de sécurité plongée</h2>
+      <ul>
+        <li><span class="var ppo2-color">PpO₂ max loisir</span> — <strong>1,4 bar</strong></li>
+        <li><span class="var ppo2-color">PpO₂ max déco</span> — <strong>1,6 bar</strong></li>
+        <li><span class="var pct-color">Air</span> — <strong>21 % O₂</strong></li>
+        <li><span class="var pct-color">Nitrox EAN32</span> — <strong>32 % O₂</strong></li>
+        <li><span class="var pct-color">Nitrox EAN36</span> — <strong>36 % O₂</strong></li>
+      </ul>
+    </section>
+
+    <footer class="app-footer">
+      Diamant de Dalton · PWA hors ligne
+    </footer>
+
+  </main>
+
+  <script src="app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js');
+    }
+  </script>
+</body>
+</html>
