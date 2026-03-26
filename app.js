@@ -5,8 +5,15 @@ const inputs = {
   pct:  document.getElementById('pct'),
   pabs: document.getElementById('pabs'),
 };
-const status   = document.getElementById('status');
-const btnReset = document.getElementById('btn-reset');
+const status     = document.getElementById('status');
+const btnReset   = document.getElementById('btn-reset');
+const depthHint  = document.getElementById('depth-hint');
+
+function updateDepth(pabsVal) {
+  if (pabsVal === null || pabsVal < 1) { depthHint.textContent = ''; return; }
+  const depth = Math.round((pabsVal - 1) * 10);
+  depthHint.textContent = '≈ ' + depth + ' m';
+}
 
 // Garde la trace de quel champ a été modifié en dernier
 // pour déterminer lequel calculer
@@ -99,8 +106,12 @@ function compute() {
     if (pct <= 0) { setStatus('⚠️ %O₂ doit être > 0', 'warning'); return; }
     const result = ppo2 / (pct / 100);
     setValue('pabs', result, false);
+    updateDepth(result);
     showWarning(ppo2);
   }
+
+  // Mise à jour profondeur si Pabs est saisi manuellement
+  if (toCompute !== 'pabs') updateDepth(pabs);
 }
 
 function showWarning(ppo2Val) {
@@ -130,5 +141,6 @@ btnReset.addEventListener('click', () => {
     inp.classList.remove('computed', 'computed-warning');
   });
   lastEdited.order = [];
+  depthHint.textContent = '';
   setStatus('Remplissez 2 champs pour calculer le 3ème', '');
 });

@@ -228,6 +228,14 @@ h1 {
   min-width: 18px;
 }
 
+.depth-hint {
+  font-size: 0.68rem;
+  color: var(--blue);
+  font-weight: 600;
+  min-height: 14px;
+  letter-spacing: 0.3px;
+}
+
 /* ── Zone couleurs ── */
 #zone-ppo2 label  { color: var(--teal); }
 #zone-pct  label  { color: #ff9900; }
