@@ -35,7 +35,6 @@
       <span class="var pct-color">%O₂</span>
       <span class="op">×</span>
       <span class="var pabs-color">P<sub>abs</sub></span>
-      <span class="op">÷ 100</span>
     </p>
 
     <!-- Diamant -->
@@ -97,8 +96,8 @@
       <div class="field-zone zone-bottom-left" id="zone-pct">
         <label for="pct">%O₂</label>
         <div class="input-row">
-          <input type="number" id="pct" placeholder="—" step="0.1" min="0" max="100" inputmode="decimal" />
-          <span class="unit">%</span>
+          <input type="number" id="pct" placeholder="—" step="0.001" min="0" max="1" inputmode="decimal" />
+          <span class="unit"></span>
         </div>
       </div>
 
@@ -128,9 +127,9 @@
       <ul>
         <li><span class="var ppo2-color">PpO₂ max loisir</span> — <strong>1,4 bar</strong></li>
         <li><span class="var ppo2-color">PpO₂ max déco</span> — <strong>1,6 bar</strong></li>
-        <li><span class="var pct-color">Air</span> — <strong>21 % O₂</strong></li>
-        <li><span class="var pct-color">Nitrox EAN32</span> — <strong>32 % O₂</strong></li>
-        <li><span class="var pct-color">Nitrox EAN36</span> — <strong>36 % O₂</strong></li>
+        <li><span class="var pct-color">Air</span> — <strong>%O₂ = 0.21</strong></li>
+        <li><span class="var pct-color">Nitrox EAN32</span> — <strong>%O₂ = 0.32</strong></li>
+        <li><span class="var pct-color">Nitrox EAN36</span> — <strong>%O₂ = 0.36</strong></li>
       </ul>
     </section>
 
