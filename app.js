@@ -79,24 +79,24 @@ function compute() {
 
   if (toCompute === 'ppo2') {
     if (pct === null || pabs === null) return;
-    if (pct < 0 || pct > 1) { setStatus('⚠️ %O₂ doit être entre 0 et 1 (ex: 0.21 pour l\'air)', 'warning'); return; }
-    if (pabs <= 0)           { setStatus('⚠️ Pabs doit être > 0', 'warning'); return; }
-    const result = pct * pabs;
+    if (pct < 0 || pct > 100) { setStatus('⚠️ %O₂ doit être entre 0 et 100', 'warning'); return; }
+    if (pabs <= 0)             { setStatus('⚠️ Pabs doit être > 0', 'warning'); return; }
+    const result = (pct / 100) * pabs;
     setValue('ppo2', result, result > 1.4);
     showWarning(result);
 
   } else if (toCompute === 'pct') {
     if (ppo2 === null || pabs === null) return;
     if (pabs <= 0) { setStatus('⚠️ Pabs doit être > 0', 'warning'); return; }
-    const result = ppo2 / pabs;
-    if (result < 0 || result > 1) { setStatus('⚠️ Résultat %O₂ impossible (' + result.toFixed(3) + ')', 'warning'); return; }
+    const result = (ppo2 / pabs) * 100;
+    if (result < 0 || result > 100) { setStatus('⚠️ Résultat %O₂ impossible (' + result.toFixed(1) + '%)', 'warning'); return; }
     setValue('pct', result, false);
     showWarning(ppo2);
 
   } else if (toCompute === 'pabs') {
     if (ppo2 === null || pct === null) return;
     if (pct <= 0) { setStatus('⚠️ %O₂ doit être > 0', 'warning'); return; }
-    const result = ppo2 / pct;
+    const result = ppo2 / (pct / 100);
     setValue('pabs', result, false);
     showWarning(ppo2);
   }
