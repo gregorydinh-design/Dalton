@@ -136,6 +136,17 @@ inputs.ppo2.addEventListener('input', onInput('ppo2'));
 inputs.pct.addEventListener('input',  onInput('pct'));
 inputs.pabs.addEventListener('input', onInput('pabs'));
 
+document.querySelectorAll('.btn-clear').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const key = btn.dataset.target;
+    inputs[key].value = '';
+    inputs[key].classList.remove('computed', 'computed-warning');
+    lastEdited.order = lastEdited.order.filter(k => k !== key);
+    if (key === 'pabs') updateDepth(null);
+    compute();
+  });
+});
+
 btnReset.addEventListener('click', () => {
   Object.values(inputs).forEach(inp => {
     inp.value = '';

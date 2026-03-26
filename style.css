@@ -117,7 +117,7 @@ h1 {
 /* ── Diamant SVG ── */
 .diamond-wrapper {
   position: relative;
-  width: min(420px, 94vw);
+  width: min(504px, 96vw);
   aspect-ratio: 1;
   flex-shrink: 0;
   align-self: center;
@@ -145,27 +145,27 @@ h1 {
 .zone-top {
   left: 50%;
   top: 32%;
-  width: 40%;
+  width: 44%;
 }
 
 /* Bas-gauche : %O2 — centroïde du triangle bas-gauche */
 .zone-bottom-left {
-  left: 28%;
-  top: 69%;
-  width: 36%;
+  left: 27%;
+  top: 70%;
+  width: 40%;
 }
 
 /* Bas-droit : Pabs — centroïde du triangle bas-droit */
 .zone-bottom-right {
-  left: 72%;
-  top: 69%;
-  width: 36%;
+  left: 73%;
+  top: 70%;
+  width: 40%;
 }
 
 .field-zone label {
-  font-size: 0.7rem;
+  font-size: 0.78rem;
   font-weight: 700;
-  letter-spacing: 0.8px;
+  letter-spacing: 1px;
   text-transform: uppercase;
   pointer-events: none;
 }
@@ -174,24 +174,45 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 3px;
+  gap: 4px;
   width: 100%;
 }
 
 .field-zone input {
   flex: 1;
   min-width: 0;
-  background: rgba(0, 0, 0, 0.45);
-  border: 1.5px solid rgba(0, 200, 255, 0.3);
-  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 2px solid rgba(0, 200, 255, 0.35);
+  border-radius: 10px;
   color: #fff;
-  font-size: 1.15rem;
+  font-size: 1.35rem;
   font-weight: 700;
   text-align: center;
-  padding: 7px 4px;
+  padding: 8px 4px;
   outline: none;
   transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
 }
+
+/* ── Bouton effacer ── */
+.btn-clear {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  color: var(--text-dim);
+  width: 20px;
+  height: 20px;
+  font-size: 0.85rem;
+  line-height: 1;
+  cursor: pointer;
+  flex-shrink: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+.btn-clear:hover  { background: rgba(255,77,106,0.2); border-color: var(--red); color: var(--red); }
+.btn-clear:active { transform: scale(0.88); }
 
 .field-zone input:focus {
   border-color: var(--teal);
