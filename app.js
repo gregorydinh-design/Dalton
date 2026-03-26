@@ -20,7 +20,8 @@ function markEdited(key) {
 }
 
 function getValue(key) {
-  const v = parseFloat(inputs[key].value);
+  const raw = inputs[key].value.replace(',', '.');
+  const v = parseFloat(raw);
   return isNaN(v) ? null : v;
 }
 
