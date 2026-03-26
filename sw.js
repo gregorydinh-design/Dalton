@@ -1,4 +1,4 @@
-const CACHE = 'dalton-v1';
+const CACHE = 'dalton-v2';
 const ASSETS = [
   '/',
   '/index.html',

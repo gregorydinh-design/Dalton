@@ -10,6 +10,7 @@ const btnReset   = document.getElementById('btn-reset');
 const depthHint  = document.getElementById('depth-hint');
 
 function updateDepth(pabsVal) {
+  if (!depthHint) return;
   if (pabsVal === null || pabsVal < 1) { depthHint.textContent = ''; return; }
   const depth = Math.round((pabsVal - 1) * 10);
   depthHint.textContent = '≈ ' + depth + ' m';
